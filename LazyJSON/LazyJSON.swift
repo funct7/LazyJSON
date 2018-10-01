@@ -144,6 +144,7 @@ struct LazyJSON : JSONType {
         return string
     }
     
+    // TODO: Refactor!!
     private func eval() throws -> (JSON, String) {
         var json: JSON = object
         var keyPath = ""
