@@ -15,11 +15,13 @@ fileprivate extension JSON.Key {
     
     static var bar: JSON.Key { return JSON.Key(rawValue: "bar")! }
     
+    static var baz: JSON.Key { return JSON.Key(rawValue: "baz")! }
+    
 }
 
 class JSONTests: XCTestCase {
     
-    func testType() {
+    func testTopLevelDictionary() {
         var dic = [String : JSONType]()
         
         do {
@@ -108,8 +110,6 @@ class JSONTests: XCTestCase {
             XCTAssertNil(json[.foo].string)
             XCTAssertNotNil(json[.foo].array)
             XCTAssertEqual(json[.foo].array?.isEmpty, false)
-            // TODO: Fix this... array of JSONs?
-            XCTAssertEqual(json[.foo].array?.first as? String, "bar")
             XCTAssertEqual(JSON(object: json[.foo].array)[0].string, "bar")
             XCTAssertNil(JSON(object: json[.foo].array)[1].string)
             XCTAssertNotNil(json.json)
@@ -126,7 +126,87 @@ class JSONTests: XCTestCase {
             XCTAssertNotNil(json.json)
             XCTAssertNotNil(json[.foo].json)
             XCTAssertNotNil(JSON(object: json[.foo].json)[.bar], "baz")
+            XCTAssertEqual(JSON(object: json[.foo].json)[.bar].string, "baz")
+            XCTAssertEqual(json[.foo][.bar].string, "baz")
         }
+        
+        dic["foo"] = ["bar": ["baz" : 42]]
+        
+        do {
+            let json = JSON(object: dic)
+            
+            XCTAssertNil(json[.foo].number)
+            XCTAssertNil(json[.foo].string)
+            XCTAssertNil(json[.foo].array)
+            XCTAssertNotNil(json.json)
+            XCTAssertNotNil(json[.foo].json)
+            
+            XCTAssertNil(json[.foo][.bar].number)
+            XCTAssertNil(json[.foo][.bar].string)
+            XCTAssertNil(json[.foo][.bar].array)
+            XCTAssertNil(json[.foo][.foo].json)
+            XCTAssertNotNil(json[.foo][.bar].json)
+            
+            XCTAssertEqual(json[.foo][.bar].json?.count, 1)
+            
+            XCTAssertEqual(json[.foo][.bar][.baz].number, 42)
+            XCTAssertEqual(json[.foo][.bar][.baz].int, 42)
+            XCTAssertNil(json[.foo][.bar][.baz].double)
+            XCTAssertNil(json[.foo][.bar][.baz].bool)
+            XCTAssertNil(json[.foo][.bar][.baz].string)
+            XCTAssertNil(json[.foo][.bar][.baz].array)
+            XCTAssertNil(json[.foo][.bar][.baz].json)
+        }
+        
+        dic["foo"] = [["bar": 10],
+                      ["baz" : 42]]
+        
+        do {
+            let json = JSON(object: dic)
+            
+            XCTAssertNotNil(json.json)
+            
+            XCTAssertNil(json[.foo].number)
+            XCTAssertNil(json[.foo].string)
+            XCTAssertNotNil(json[.foo].array)
+            XCTAssertEqual(json[.foo].array?.count, 2)
+            XCTAssertNil(json[.foo].json)
+            
+            if case .none = json[.foo][.bar] {
+                
+            } else {
+                XCTFail()
+            }
+            
+            XCTAssertNil(json[.foo][0].number)
+            XCTAssertNil(json[.foo][0].string)
+            XCTAssertNil(json[.foo][0].array)
+            XCTAssertNotNil(json[.foo][0].json)
+            XCTAssertEqual(json[.foo][0].json?.count, 1)
+            
+            XCTAssertEqual(json[.foo][0][.bar].number, 10)
+            XCTAssertNil(json[.foo][0][.bar].string)
+            XCTAssertNil(json[.foo][0][.bar].array)
+            XCTAssertNil(json[.foo][0][.bar].json)
+            
+            XCTAssertNil(json[.foo][1].number)
+            XCTAssertNil(json[.foo][1].string)
+            XCTAssertNil(json[.foo][1].array)
+            XCTAssertNotNil(json[.foo][1].json)
+            XCTAssertEqual(json[.foo][1].json?.count, 1)
+            
+            XCTAssertEqual(json[.foo][1][.baz].number, 42)
+            XCTAssertNil(json[.foo][1][.baz].string)
+            XCTAssertNil(json[.foo][1][.baz].array)
+            XCTAssertNil(json[.foo][1][.baz].json)
+            
+            if case .none = json[.foo][2] {
+                
+            } else {
+                XCTFail()
+            }
+        }
+
     }
     
 }
