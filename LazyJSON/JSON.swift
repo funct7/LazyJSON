@@ -7,284 +7,8 @@
 //
 
 import Foundation
-
-///**
-// A wrapper for a valid JSON dictionary.
-// */
-//struct JSON: JSONType {
-//
-//    /**
-//     A structure to use as the key.
-//
-//     Extend this type and provide custom static variables.
-//     */
-//    struct Key: RawRepresentable {
-//
-//        var rawValue: String
-//
-//        init?(rawValue: String) {
-//            self.rawValue = rawValue
-//        }
-//
-//    }
-//
-////    public static func +(lhs: JSON, rhs: JSON) -> JSON {
-////        var data = lhs.dictionary
-////        for (key, value) in rhs.dictionary {
-////            data[key] = value
-////        }
-////        return JSON(map: data)
-////    }
-//
-//    /**
-//     The identifier for the JSON object.
-//
-//     When an error is thrown, the identifer is passed
-//     into the relevant `JSONError` associated value.
-//     This identifier can be used to identify the data
-//     where the error came from.
-//     */
-//    let identifier: String?
-//
-//    fileprivate var object: JSONType
-//
-//    init(identifier: String? = nil,
-//         object: JSONType)
-//    {
-//        self.identifier = identifier
-//        self.object = object
-//    }
-//
-////    public mutating func merge(map otherMap: [String: Any]?) {
-////        guard let otherMap = otherMap else { return }
-////
-////        for (key, value) in otherMap {
-////            self.dictionary[key] = value
-////        }
-////    }
-//
-////    func int(_ key: String) throws -> Int {
-////        guard let value = dictionary[key] else {
-////            throw JSONError.keyNotFound(
-////                id: identifier,
-////                type: .int(key: key)
-////            )
-////        }
-////
-////        guard let int = value as? Int else {
-////            throw JSONError.invalidType(
-////                id: identifier,
-////                type: .int(key: key)
-////            )
-////        }
-////
-////        return int
-////    }
-////
-////    func double(_ key: String) throws -> Double {
-////        guard let value = dictionary[key] else {
-////            throw JSONError.keyNotFound(
-////                id: identifier,
-////                type: .double(key: key)
-////            )
-////        }
-////        guard let double = value as? Double else {
-////            throw JSONError.invalidType(
-////                id: identifier,
-////                type: .double(key: key)
-////            )
-////        }
-////
-////        return double
-////    }
-////
-////    func str(_ key: String) throws -> String {
-////        guard let value = dictionary[key] else {
-////            throw JSONError.keyNotFound(
-////                id: identifier,
-////                type: .string(key: key)
-////            )
-////        }
-////        guard let string = value as? String else {
-////            throw JSONError.invalidType(
-////                id: identifier,
-////                type: .string(key: key)
-////            )
-////        }
-////
-////        return string
-////    }
-////
-////    func nonEmptyStr(_ key: String) throws -> String {
-////        guard let value = dictionary[key] else {
-////            throw JSONError.keyNotFound(
-////                id: identifier,
-////                type: .nonNilString(key: key)
-////            )
-////        }
-////
-////        guard let string = value as? String, string.count > 0 else {
-////            throw JSONError.invalidType(
-////                id: identifier,
-////                type: .nonNilString(key: key)
-////            )
-////        }
-////
-////        return string
-////    }
-////
-////    func bool(_ key: String) throws -> Bool {
-////        guard let value = dictionary[key] else {
-////            throw JSONError.keyNotFound(
-////                id: identifier,
-////                type: .bool(key: key)
-////            )
-////        }
-////        guard let bool = value as? Bool else {
-////            throw JSONError.invalidType(
-////                id: identifier,
-////                type: .bool(key: key)
-////            )
-////        }
-////
-////        return bool
-////    }
-////
-////    func map(_ key: String) throws -> [String : Any] {
-////        guard let value = dictionary[key] else {
-////            throw JSONError.keyNotFound(
-////                id: identifier,
-////                type: .map(key: key, type: .any)
-////            )
-////        }
-////        guard let map = value as? [String : Any] else {
-////            throw JSONError.invalidType(
-////                id: identifier,
-////                type: .map(key: key, type: .any)
-////            )
-////        }
-////
-////        return map
-////    }
-////
-////    func arr(_ key: String) throws -> [Any] {
-////        guard let array = self.map[key] as? [Any] else {
-////            throw NSError.invalidDataStructure(dataType: T.self,
-////                                               key: key,
-////                                               valueType: [Any].self)
-////        }
-////        return array
-////    }
-////
-////    func dicArr(_ key: String) throws -> [JSON] {
-////        guard let dicArr = self.map[key] as? [[String: Any]] else {
-////            throw NSError.invalidDataStructure(dataType: T.self,
-////                                               key: key,
-////                                               valueType: [[String: Any]].self)
-////        }
-////        return dicArr.map { JSON($0) }
-////    }
-//
-////    public func get(_ key: String) -> Any? {
-////        return self.dictionary[key]
-////    }
-////
-////    public subscript(key: String) -> Any? {
-////        get {
-////            return self.dictionary[key]
-////        }
-////        set {
-////            self.dictionary[key] = newValue
-////        }
-////    }
-////
-////
-////    public var keys: Dictionary<String, Any>.Keys {
-////        return dictionary.keys
-////    }
-////
-////    public var values: Dictionary<String, Any>.Values {
-////        return dictionary.values
-////    }
-//
-//}
-//
-//extension JSON {
-//
-//    subscript(key: Key) -> Wrapper {
-//        get {
-//            if let object = object as? JSONKeyedContainer {
-//                return Wrapper(object: object[key.rawValue])
-//            } else {
-//                return Wrapper.none
-//            }
-//        }
-//        set {
-//            if var object = object as? JSONKeyedContainer {
-//                object[key.rawValue] = newValue
-//                self.object = Wrapper(object: object)
-//            }
-//        }
-//    }
-//
-//    subscript(index: Int) -> Wrapper {
-//        get {
-//            if let object = object as? JSONIndexedContainer {
-//                return Wrapper(object: object[index])
-//            } else {
-//                return Wrapper.none
-//            }
-//        }
-//        set {
-//            if var object = object as? JSONIndexedContainer {
-//                object[index] = newValue
-//                self.object = Wrapper(object: object)
-//            }
-//        }
-//    }
-//
-//    subscript(key: JSONKey) -> Wrapper {
-//        get {
-//            switch key {
-//
-//            case .index(let index):
-//                guard let object = object as? JSONIndexedContainer
-//                else { return .none }
-//
-//                // TODO: Insert out of bounds check.
-//                return Wrapper(object: object[index])
-//
-//            case .key(let key):
-//                guard let object = object as? JSONKeyedContainer
-//                else { return .none }
-//
-//                return Wrapper(object: object[key])
-//            }
-//        }
-//        set {
-//            switch key {
-//
-//            case .index(let index):
-//                guard var object = object as? JSONIndexedContainer
-//                else { return }
-//
-//                object[index] = newValue
-//                self.object = object
-//
-//            case .key(let key):
-//                guard var object = object as? JSONKeyedContainer
-//                else { return }
-//
-//                object[key] = newValue
-//                self.object = object
-//            }
-//        }
-//    }
-//
-//}
-
 /**
- A lightweight wrapper for JSON objects.
+ An `Optional` type extension for `JSONType`s.
  
  While this type provides easy access to values at key paths,
  the client cannot determine which key-value pair is invalid.
@@ -292,16 +16,18 @@ import Foundation
  In order to get debug information on where the operation went wrong,
  use `LazyJSON` instead.
  */
-enum JSON : JSONType {
+typealias JSON = Optional<JSONType>
+
+extension Optional where Wrapped == JSONType {
     
     /**
      The type encapsulating the string key that is used to access the value.
      
      Clients of `JSON` are expected to extend this type like the following code:
      ```
-     extension JSON.Key {
+     extension Optional.Key {
      
-        static var foo: JSON.Key { return JSON.Key(rawValue: "foo")! }
+     static var foo: JSON.Key { return JSON.Key(rawValue: "foo")! }
      
      }
      ```
@@ -314,78 +40,68 @@ enum JSON : JSONType {
         
     }
 
-    case some(JSONType)
-    
-    case none
-    
-    // TODO: Use identifier.
-    /**
-     Initializes the JSON object.
-     
-     - Todo: Use identifier to identify APIs.
-     
-     - Parameters:
-        - identifier: A unique ID used to identify the JSON object.
-        - object: The JSON object to encapsulate.
-     */
-    init(identifier: String? = nil,
-         object: JSONType?)
-    {
-        if let object = object {
-            self = .some(object)
-        } else {
-            self = .none
-        }
-    }
-    
 }
 
-extension JSON {
+extension Optional where Wrapped == JSONType {
     
-    subscript(key: JSON.Key) -> JSON {
+    subscript(key: Optional.Key) -> JSON {
         get {
-            if case .some(let val) = self,
-               let object = val as? JSONKeyedContainer
+            if let val = self,
+               let object = val as? JSONKeyedContainer,
+               let value = object[key.rawValue]
             {
-                return JSON(object: object[key.rawValue])
+                return Optional(value)
             } else {
                 return .none
             }
         }
+        // TODO: Test this
         set {
             guard case .some(let val) = self,
                   var object = val as? JSONKeyedContainer
             else { return }
             
-            object[key.rawValue] = newValue
-            self = JSON(object: object)
+            if let newValue = newValue {
+                object[key.rawValue] = newValue
+            } else {
+                object.removeValue(forKey: key.rawValue)
+            }
+            
+            self = Optional(object)
         }
     }
     
     subscript(index: Int) -> JSON {
         get {
             if case .some(let val) = self,
-               let object = val as? JSONIndexedContainer,
-               index < object.count
+                let object = val as? JSONIndexedContainer,
+                index < object.count
             {
-                return JSON(object: object[index])
+                return Optional(object[index])
             } else {
                 return .none
             }
         }
+        // TODO: Test this
         set {
             guard case .some(let val) = self,
-                  var object = val as? JSONIndexedContainer
+                  var object = val as? JSONIndexedContainer,
+                  index < object.count
             else { return }
             
-            object[index] = newValue
-            self = JSON(object: object)
+            if let newValue = newValue {
+                object[index] = newValue
+            } else {
+                object.remove(at: index)
+            }
+            
+            self = Optional(object)
         }
     }
     
 }
 
-extension JSON {
+extension Optional where Wrapped == JSONType {
     
     /**
      Returns an `Int` value at the specified key path.
@@ -445,7 +161,7 @@ extension JSON {
     var json: JSONKeyedContainer? { return getValue() }
     
     private func getValue<T: JSONType>() -> T? {
-        guard case .some(let value) = self,
+        guard let value = self,
               let result = value as? T
         else { return nil }
         
@@ -453,6 +169,178 @@ extension JSON {
     }
     
 }
+
+//
+///**
+// A lightweight wrapper for JSON objects.
+//
+// While this type provides easy access to values at key paths,
+// the client cannot determine which key-value pair is invalid.
+//
+// In order to get debug information on where the operation went wrong,
+// use `LazyJSON` instead.
+// */
+//enum JSON : JSONType {
+//
+//    /**
+//     The type encapsulating the string key that is used to access the value.
+//
+//     Clients of `JSON` are expected to extend this type like the following code:
+//     ```
+//     extension JSON.Key {
+//
+//        static var foo: JSON.Key { return JSON.Key(rawValue: "foo")! }
+//
+//     }
+//     ```
+//     */
+//    struct Key: RawRepresentable {
+//
+//        var rawValue: String
+//
+//        init?(rawValue: String) { self.rawValue = rawValue }
+//
+//    }
+//
+//    case some(JSONType)
+//
+//    case none
+//
+//    // TODO: Use identifier.
+//    /**
+//     Initializes the JSON object.
+//
+//     - Todo: Use identifier to identify APIs.
+//
+//     - Parameters:
+//        - identifier: A unique ID used to identify the JSON object.
+//        - object: The JSON object to encapsulate.
+//     */
+//    init(identifier: String? = nil,
+//         object: JSONType?)
+//    {
+//        if let object = object {
+//            self = .some(object)
+//        } else {
+//            self = .none
+//        }
+//    }
+//
+//}
+//
+//extension JSON {
+//
+//    subscript(key: JSON.Key) -> JSON {
+//        get {
+//            if case .some(let val) = self,
+//               let object = val as? JSONKeyedContainer
+//            {
+//                return JSON(object: object[key.rawValue])
+//            } else {
+//                return .none
+//            }
+//        }
+//        set {
+//            guard case .some(let val) = self,
+//                  var object = val as? JSONKeyedContainer
+//            else { return }
+//
+//            object[key.rawValue] = newValue
+//            self = JSON(object: object)
+//        }
+//    }
+//
+//    subscript(index: Int) -> JSON {
+//        get {
+//            if case .some(let val) = self,
+//               let object = val as? JSONIndexedContainer,
+//               index < object.count
+//            {
+//                return JSON(object: object[index])
+//            } else {
+//                return .none
+//            }
+//        }
+//        set {
+//            guard case .some(let val) = self,
+//                  var object = val as? JSONIndexedContainer
+//            else { return }
+//
+//            object[index] = newValue
+//            self = JSON(object: object)
+//        }
+//    }
+//
+//}
+//
+//extension JSON {
+//
+//    /**
+//     Returns an `Int` value at the specified key path.
+//
+//     If there were any invalid keys or wrong value types
+//     in the key path, the returned value is `nil`.
+//     */
+//    var int: Int? { return getValue() }
+//
+//    /**
+//     Returns a `Double` value at the specified key path.
+//
+//     If there were any invalid keys or wrong value types
+//     in the key path, the returned value is `nil`.
+//     */
+//    var double: Double? { return getValue() }
+//
+//    /**
+//     Returns an `NSNumber` value at the specified key path.
+//
+//     If there were any invalid keys or wrong value types
+//     in the key path, the returned value is `nil`.
+//     */
+//    var number: NSNumber? { return getValue() }
+//
+//
+//    /**
+//     Returns a `Bool` value at the specified key path.
+//
+//     If there were any invalid keys or wrong value types
+//     in the key path, the returned value is `nil`.
+//     */
+//    var bool: Bool? { return getValue() }
+//
+//    /**
+//     Returns a `String` value at the specified key path.
+//
+//     If there were any invalid keys or wrong value types
+//     in the key path, the returned value is `nil`.
+//     */
+//    var string: String? { return getValue() }
+//
+//    /**
+//     Returns an array of `JSONType`s at the specified key path.
+//
+//     If there were any invalid keys or wrong value types
+//     in the key path, the returned value is `nil`.
+//     */
+//    var array: JSONIndexedContainer? { return getValue() }
+//
+//    /**
+//     Returns a `JSONKeyedContainer` object at the specified key path.
+//
+//     If there were any invalid keys or wrong value types
+//     in the key path, the returned value is `nil`.
+//     */
+//    var json: JSONKeyedContainer? { return getValue() }
+//
+//    private func getValue<T: JSONType>() -> T? {
+//        guard case .some(let value) = self,
+//              let result = value as? T
+//        else { return nil }
+//
+//        return result
+//    }
+//
+//}
 
 protocol JSONType { }
 
