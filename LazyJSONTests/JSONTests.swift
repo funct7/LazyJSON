@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ValidJSON
+@testable import LazyJSON
 
 fileprivate extension JSON.Key {
     
