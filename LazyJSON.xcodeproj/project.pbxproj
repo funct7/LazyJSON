@@ -10,7 +10,7 @@
 		D1858EB321620EA1008496AD /* JSONType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1858EB221620EA1008496AD /* JSONType.swift */; };
 		D1858EB521620EBA008496AD /* LazyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1858EB421620EBA008496AD /* LazyJSON.swift */; };
 		D1FF9CF8215DA25C00E30FC6 /* LazyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FF9CEE215DA25C00E30FC6 /* LazyJSON.framework */; };
-		D1FF9CFF215DA25D00E30FC6 /* ValidJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = D1FF9CF1215DA25C00E30FC6 /* ValidJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1FF9CFF215DA25D00E30FC6 /* LazyJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = D1FF9CF1215DA25C00E30FC6 /* LazyJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D1FF9D09215DA28800E30FC6 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FF9D08215DA28800E30FC6 /* JSON.swift */; };
 		D1FF9D0B215DA41A00E30FC6 /* JSONError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FF9D0A215DA41A00E30FC6 /* JSONError.swift */; };
 		D1FF9D0F215DA4F400E30FC6 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FF9D0E215DA4F400E30FC6 /* JSONTests.swift */; };
@@ -31,7 +31,7 @@
 		D1858EB221620EA1008496AD /* JSONType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONType.swift; sourceTree = "<group>"; };
 		D1858EB421620EBA008496AD /* LazyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyJSON.swift; sourceTree = "<group>"; };
 		D1FF9CEE215DA25C00E30FC6 /* LazyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LazyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1FF9CF1215DA25C00E30FC6 /* ValidJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValidJSON.h; sourceTree = "<group>"; };
+		D1FF9CF1215DA25C00E30FC6 /* LazyJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LazyJSON.h; sourceTree = "<group>"; };
 		D1FF9CF2215DA25C00E30FC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D1FF9CF7215DA25C00E30FC6 /* LazyJSONTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LazyJSONTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1FF9CFE215DA25D00E30FC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,7 +85,7 @@
 				D1FF9D08215DA28800E30FC6 /* JSON.swift */,
 				D1FF9D0A215DA41A00E30FC6 /* JSONError.swift */,
 				D1858EB421620EBA008496AD /* LazyJSON.swift */,
-				D1FF9CF1215DA25C00E30FC6 /* ValidJSON.h */,
+				D1FF9CF1215DA25C00E30FC6 /* LazyJSON.h */,
 				D1FF9CF2215DA25C00E30FC6 /* Info.plist */,
 			);
 			path = LazyJSON;
@@ -108,7 +108,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1FF9CFF215DA25D00E30FC6 /* ValidJSON.h in Headers */,
+				D1FF9CFF215DA25D00E30FC6 /* LazyJSON.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
