@@ -21,7 +21,7 @@ fileprivate extension Optional.Key {
 
 class LazyJSONTests: XCTestCase {
     
-    func test() {
+    func testTopLevelDictionary() {
         let dic: [String : JSONType] = [
             "foo" : 20,
             "bar" : ["string"],
