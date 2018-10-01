@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		D1FF9CF8215DA25C00E30FC6 /* ValidJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FF9CEE215DA25C00E30FC6 /* ValidJSON.framework */; };
-		D1FF9CFD215DA25C00E30FC6 /* ValidJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FF9CFC215DA25C00E30FC6 /* ValidJSONTests.swift */; };
 		D1FF9CFF215DA25D00E30FC6 /* ValidJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = D1FF9CF1215DA25C00E30FC6 /* ValidJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D1FF9D09215DA28800E30FC6 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FF9D08215DA28800E30FC6 /* JSON.swift */; };
+		D1FF9D0B215DA41A00E30FC6 /* JSONError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FF9D0A215DA41A00E30FC6 /* JSONError.swift */; };
+		D1FF9D0F215DA4F400E30FC6 /* JSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FF9D0E215DA4F400E30FC6 /* JSONTests.swift */; };
+		D1FF9D11215E0B5300E30FC6 /* LazyJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1FF9D10215E0B5300E30FC6 /* LazyJSONTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,8 +30,11 @@
 		D1FF9CF1215DA25C00E30FC6 /* ValidJSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValidJSON.h; sourceTree = "<group>"; };
 		D1FF9CF2215DA25C00E30FC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D1FF9CF7215DA25C00E30FC6 /* ValidJSONTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValidJSONTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D1FF9CFC215DA25C00E30FC6 /* ValidJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidJSONTests.swift; sourceTree = "<group>"; };
 		D1FF9CFE215DA25D00E30FC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D1FF9D08215DA28800E30FC6 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		D1FF9D0A215DA41A00E30FC6 /* JSONError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONError.swift; sourceTree = "<group>"; };
+		D1FF9D0E215DA4F400E30FC6 /* JSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONTests.swift; sourceTree = "<group>"; };
+		D1FF9D10215E0B5300E30FC6 /* LazyJSONTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyJSONTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,8 @@
 		D1FF9CF0215DA25C00E30FC6 /* ValidJSON */ = {
 			isa = PBXGroup;
 			children = (
+				D1FF9D08215DA28800E30FC6 /* JSON.swift */,
+				D1FF9D0A215DA41A00E30FC6 /* JSONError.swift */,
 				D1FF9CF1215DA25C00E30FC6 /* ValidJSON.h */,
 				D1FF9CF2215DA25C00E30FC6 /* Info.plist */,
 			);
@@ -80,7 +88,8 @@
 		D1FF9CFB215DA25C00E30FC6 /* ValidJSONTests */ = {
 			isa = PBXGroup;
 			children = (
-				D1FF9CFC215DA25C00E30FC6 /* ValidJSONTests.swift */,
+				D1FF9D0E215DA4F400E30FC6 /* JSONTests.swift */,
+				D1FF9D10215E0B5300E30FC6 /* LazyJSONTests.swift */,
 				D1FF9CFE215DA25D00E30FC6 /* Info.plist */,
 			);
 			path = ValidJSONTests;
@@ -148,6 +157,7 @@
 				TargetAttributes = {
 					D1FF9CED215DA25C00E30FC6 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 					D1FF9CF6215DA25C00E30FC6 = {
 						CreatedOnToolsVersion = 10.0;
@@ -194,6 +204,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1FF9D0B215DA41A00E30FC6 /* JSONError.swift in Sources */,
+				D1FF9D09215DA28800E30FC6 /* JSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +213,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1FF9CFD215DA25C00E30FC6 /* ValidJSONTests.swift in Sources */,
+				D1FF9D11215E0B5300E30FC6 /* LazyJSONTests.swift in Sources */,
+				D1FF9D0F215DA4F400E30FC6 /* JSONTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +281,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -326,7 +339,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -341,6 +354,7 @@
 		D1FF9D03215DA25D00E30FC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -358,6 +372,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.knowre.ValidJSON;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -366,6 +381,7 @@
 		D1FF9D04215DA25D00E30FC6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -391,6 +407,7 @@
 		D1FF9D06215DA25D00E30FC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8HCBQJDHQ6;
 				INFOPLIST_FILE = ValidJSONTests/Info.plist;
@@ -409,6 +426,7 @@
 		D1FF9D07215DA25D00E30FC6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8HCBQJDHQ6;
 				INFOPLIST_FILE = ValidJSONTests/Info.plist;
