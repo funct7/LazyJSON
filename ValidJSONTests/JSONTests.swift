@@ -111,6 +111,7 @@ class JSONTests: XCTestCase {
             // TODO: Fix this... array of JSONs?
             XCTAssertEqual(json[.foo].array?.first as? String, "bar")
             XCTAssertEqual(JSON(object: json[.foo].array)[0].string, "bar")
+            XCTAssertNil(JSON(object: json[.foo].array)[1].string)
             XCTAssertNotNil(json.json)
         }
         

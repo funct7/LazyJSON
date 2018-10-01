@@ -365,7 +365,8 @@ extension JSON {
     subscript(index: Int) -> JSON {
         get {
             if case .some(let val) = self,
-               let object = val as? JSONIndexedContainer
+               let object = val as? JSONIndexedContainer,
+               index < object.count
             {
                 return JSON(object: object[index])
             } else {
