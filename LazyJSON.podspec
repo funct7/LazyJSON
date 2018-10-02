@@ -70,7 +70,7 @@ i.e. which key was missing or whether it's because the type didn't match the val
   #
 
   # s.platform     = :ios
-  s.platform     = :ios, "9.3"
+  s.platform     = :ios, "8.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
