@@ -34,7 +34,7 @@ i.e. which key was missing or whether it's because the type didn't match the val
 `LazyJSON` provides you with the key path at which the error was thrown.
                    DESC
 
-  # s.homepage     = "http://EXAMPLE/LazyJSON"
+  s.homepage     = "https://github.com/funct7/LazyJSON"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -45,8 +45,7 @@ i.e. which key was missing or whether it's because the type didn't match the val
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  s.license      = "MIT (example)"
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  s.license      = { :type => "MIT", :file => "LICENSE.md" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
