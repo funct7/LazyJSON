@@ -8,69 +8,6 @@
 
 import Foundation
 
-// Lazy evaluating JSON type
-// - Have a reference to the wrapping parent.
-
-// Alternatively
-// Subscript should be recorded.
-// - Any error should be also wrapped.
-
-// Evaluation happens at the time of unwrapping the value.
-
-/*
- [ Case 1 ]
-            v
- try json[.foo][0][.bar][1].intValue()
- --> JSONError.invalidType "invalid type key: foo, value: Array"
- 
- [ Case 2 ]
-                     v
- try json[.foo][0][.bar][1].boolValue()
- --> JSONError.invalidKey "invalid key: bar"
- 
- * queue should be returned at each step.
- 
- // Case 1
- - operationQueue: [unwrap with key "foo"] [unwrap with index 0]
-                                            ^ throw error here
- 
- // Case 2
- - operationQueue: [unwrap with key "foo"] [unwrap with index 0] [unwrap with key "bar"]
-                                                                  ^ throw error here
- var json = object
- var list = [String]()
- 
- for op in list {
-    swtich op {
-        case .key(let key):
-            if var temp = json as? Map {
-                json = temp[key]
-                list += key
-            } else if json == nil {
-                throw JSONError.invalidKey(list)
-            } else {
-                throw JSONError.invalidType(list, Map.self)
-            }
- 
-        case .index(let index):
-            if var temp = json as? Array {
-                if index < temp.count {
-                    json = temp[index]
-                    list += "\(index)"
-                } else {
-                    throw JSONError.invalidKey(list)
-                }
-            } else if json == nil {
-                throw JSONError.invalidKey(list)
-            } else {
-                throw JSONError.invalidType(list, Array.self)
-            }
- 
-    }
- }
- 
- */
-
 enum Operation {
     
     case key(JSON.Key)
