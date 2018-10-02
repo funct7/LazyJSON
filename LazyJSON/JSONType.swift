@@ -8,15 +8,15 @@
 
 import Foundation
 
-protocol JSONType { }
+public protocol JSONType { }
 
-protocol JSONElementType: JSONType { }
+public protocol JSONElementType: JSONType { }
 
-protocol JSONContainerType: JSONType { }
+public protocol JSONContainerType: JSONType { }
 
-typealias JSONIndexedContainer = [JSONType]
+public typealias JSONIndexedContainer = [JSONType]
 
-typealias JSONKeyedContainer = [String : JSONType]
+public typealias JSONKeyedContainer = [String : JSONType]
 
 extension Dictionary : JSONType, JSONContainerType where Key == String, Value == JSONType { }
 
