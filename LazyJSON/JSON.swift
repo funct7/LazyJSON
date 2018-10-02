@@ -16,7 +16,7 @@ import Foundation
  In order to get debug information on where the operation went wrong,
  use `LazyJSON` instead.
  */
-typealias JSON = Optional<JSONType>
+public typealias JSON = Optional<JSONType>
 
 extension Optional where Wrapped == JSONType {
     
@@ -32,11 +32,11 @@ extension Optional where Wrapped == JSONType {
      }
      ```
      */
-    struct Key: RawRepresentable {
+    public struct Key: RawRepresentable {
         
-        var rawValue: String
+        public var rawValue: String
         
-        init?(rawValue: String) { self.rawValue = rawValue }
+        public init?(rawValue: String) { self.rawValue = rawValue }
         
     }
 
@@ -44,7 +44,7 @@ extension Optional where Wrapped == JSONType {
 
 extension Optional where Wrapped == JSONType {
     
-    subscript(key: Optional.Key) -> JSON {
+    public subscript(key: Optional.Key) -> JSON {
         get {
             if let val = self,
                let object = val as? JSONKeyedContainer,
@@ -71,7 +71,7 @@ extension Optional where Wrapped == JSONType {
         }
     }
     
-    subscript(index: Int) -> JSON {
+    public subscript(index: Int) -> JSON {
         get {
             if case .some(let val) = self,
                 let object = val as? JSONIndexedContainer,
@@ -109,7 +109,7 @@ extension Optional where Wrapped == JSONType {
      If there were any invalid keys or wrong value types
      in the key path, the returned value is `nil`.
      */
-    var int: Int? { return getValue() }
+    public var int: Int? { return getValue() }
     
     /**
      Returns a `Double` value at the specified key path.
@@ -117,7 +117,7 @@ extension Optional where Wrapped == JSONType {
      If there were any invalid keys or wrong value types
      in the key path, the returned value is `nil`.
      */
-    var double: Double? { return getValue() }
+    public var double: Double? { return getValue() }
     
     /**
      Returns an `NSNumber` value at the specified key path.
@@ -125,7 +125,7 @@ extension Optional where Wrapped == JSONType {
      If there were any invalid keys or wrong value types
      in the key path, the returned value is `nil`.
      */
-    var number: NSNumber? { return getValue() }
+    public var number: NSNumber? { return getValue() }
     
     
     /**
@@ -134,7 +134,7 @@ extension Optional where Wrapped == JSONType {
      If there were any invalid keys or wrong value types
      in the key path, the returned value is `nil`.
      */
-    var bool: Bool? { return getValue() }
+    public var bool: Bool? { return getValue() }
     
     /**
      Returns a `String` value at the specified key path.
@@ -142,7 +142,7 @@ extension Optional where Wrapped == JSONType {
      If there were any invalid keys or wrong value types
      in the key path, the returned value is `nil`.
      */
-    var string: String? { return getValue() }
+    public var string: String? { return getValue() }
     
     /**
      Returns an array of `JSONType`s at the specified key path.
@@ -150,7 +150,7 @@ extension Optional where Wrapped == JSONType {
      If there were any invalid keys or wrong value types
      in the key path, the returned value is `nil`.
      */
-    var array: JSONIndexedContainer? { return getValue() }
+    public var array: JSONIndexedContainer? { return getValue() }
     
     /**
      Returns a `JSONKeyedContainer` object at the specified key path.
@@ -158,7 +158,7 @@ extension Optional where Wrapped == JSONType {
      If there were any invalid keys or wrong value types
      in the key path, the returned value is `nil`.
      */
-    var json: JSONKeyedContainer? { return getValue() }
+    public var json: JSONKeyedContainer? { return getValue() }
     
     private func getValue<T: JSONType>() -> T? {
         guard let value = self,
