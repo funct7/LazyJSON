@@ -11,11 +11,11 @@ import Foundation
 public enum JSONError : LocalizedError {
     
     /// The specified key does not exist.
-    case keyNotFound(id: String)
+    case keyNotFound(keyPath: String)
     
     /// The key-value pair exists,
     /// but the value type is different than the specified type.
-    case invalidType(id: String, type: JSONType.Type)
+    case invalidType(keyPath: String, type: JSONType.Type)
     
     public var errorDescription: String? {
         switch self {

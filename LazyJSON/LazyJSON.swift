@@ -110,7 +110,7 @@ struct LazyJSON : JSONType {
         
         guard let number = json.number else {
             throw JSONError.invalidType(
-                id: keyPath,
+                keyPath: keyPath,
                 type: NSNumber.self
             )
         }
@@ -123,7 +123,7 @@ struct LazyJSON : JSONType {
         
         guard let int = json.int else {
             throw JSONError.invalidType(
-                id: keyPath,
+                keyPath: keyPath,
                 type: Int.self
             )
         }
@@ -136,7 +136,7 @@ struct LazyJSON : JSONType {
 
         guard let double = json.double else {
             throw JSONError.invalidType(
-                id: keyPath,
+                keyPath: keyPath,
                 type: Double.self
             )
         }
@@ -149,7 +149,7 @@ struct LazyJSON : JSONType {
         
         guard let bool = json.bool else {
             throw JSONError.invalidType(
-                id: keyPath,
+                keyPath: keyPath,
                 type: Bool.self
             )
         }
@@ -162,7 +162,7 @@ struct LazyJSON : JSONType {
         
         guard let string = json.string else {
             throw JSONError.invalidType(
-                id: keyPath,
+                keyPath: keyPath,
                 type: String.self
             )
         }
@@ -175,7 +175,7 @@ struct LazyJSON : JSONType {
         
         guard let array = json.array else {
             throw JSONError.invalidType(
-                id: keyPath,
+                keyPath: keyPath,
                 type: JSONIndexedContainer.self
             )
         }
@@ -188,7 +188,7 @@ struct LazyJSON : JSONType {
         
         guard let dictionary = json.json else {
             throw JSONError.invalidType(
-                id: keyPath,
+                keyPath: keyPath,
                 type: JSONKeyedContainer.self
             )
         }
@@ -208,7 +208,7 @@ struct LazyJSON : JSONType {
                     switch json {
                         
                     case .none:
-                        throw JSONError.keyNotFound(id: String(keyPath.dropFirst()))
+                        throw JSONError.keyNotFound(keyPath: String(keyPath.dropFirst()))
                         
                     case .some(let temp):
                         if var temp = temp as? JSONKeyedContainer {
@@ -217,11 +217,11 @@ struct LazyJSON : JSONType {
                             if let temp = temp[key.rawValue] {
                                 json = .some(temp)
                             } else {
-                                throw JSONError.keyNotFound(id: String(keyPath.dropFirst()))
+                                throw JSONError.keyNotFound(keyPath: String(keyPath.dropFirst()))
                             }
                         } else {
                             throw JSONError.invalidType(
-                                id: String(keyPath.dropFirst()),
+                                keyPath: String(keyPath.dropFirst()),
                                 type: JSONKeyedContainer.self
                             )
                         }
@@ -234,7 +234,7 @@ struct LazyJSON : JSONType {
                     switch json {
                         
                     case .none:
-                        throw JSONError.keyNotFound(id: String(keyPath.dropFirst()))
+                        throw JSONError.keyNotFound(keyPath: String(keyPath.dropFirst()))
                         
                     case .some(let temp):
                         if var temp = temp as? JSONIndexedContainer {
@@ -243,11 +243,11 @@ struct LazyJSON : JSONType {
                             if index < temp.count {
                                 json = .some(temp[index])
                             } else {
-                                throw JSONError.keyNotFound(id: String(keyPath.dropFirst()))
+                                throw JSONError.keyNotFound(keyPath: String(keyPath.dropFirst()))
                             }
                         } else {
                             throw JSONError.invalidType(
-                                id: String(keyPath.dropFirst()),
+                                keyPath: String(keyPath.dropFirst()),
                                 type: JSONIndexedContainer.self
                             )
                         }
