@@ -45,7 +45,7 @@ i.e. which key was missing or whether it's because the type didn't match the val
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  s.license      = { :type => "MIT", :file => "LICENSE.md" }
+  s.license      = { :type => "MIT", :file => "LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -69,7 +69,7 @@ i.e. which key was missing or whether it's because the type didn't match the val
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  s.platform     = :ios
+  # s.platform     = :ios
   s.platform     = :ios, "9.3"
 
   #  When using multiple platforms
