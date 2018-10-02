@@ -105,6 +105,19 @@ struct LazyJSON : JSONType {
         }
     }
     
+    func numberValue() throws -> NSNumber {
+        let (json, keyPath) = try eval()
+        
+        guard let number = json.number else {
+            throw JSONError.invalidType(
+                id: keyPath,
+                type: NSNumber.self
+            )
+        }
+        
+        return number
+    }
+    
     func intValue() throws -> Int {
         let (json, keyPath) = try eval()
         
@@ -131,6 +144,19 @@ struct LazyJSON : JSONType {
         return double
     }
     
+    func boolValue() throws -> Bool {
+        let (json, keyPath) = try eval()
+        
+        guard let bool = json.bool else {
+            throw JSONError.invalidType(
+                id: keyPath,
+                type: Bool.self
+            )
+        }
+        
+        return bool
+    }
+    
     func stringValue() throws -> String {
         let (json, keyPath) = try eval()
         
@@ -142,6 +168,32 @@ struct LazyJSON : JSONType {
         }
         
         return string
+    }
+    
+    func arrayValue() throws -> JSONIndexedContainer {
+        let (json, keyPath) = try eval()
+        
+        guard let array = json.array else {
+            throw JSONError.invalidType(
+                id: keyPath,
+                type: JSONIndexedContainer.self
+            )
+        }
+        
+        return array
+    }
+    
+    func dictionaryValue() throws -> JSONKeyedContainer {
+        let (json, keyPath) = try eval()
+        
+        guard let dictionary = json.json else {
+            throw JSONError.invalidType(
+                id: keyPath,
+                type: JSONKeyedContainer.self
+            )
+        }
+        
+        return dictionary
     }
     
     // TODO: Refactor!!
