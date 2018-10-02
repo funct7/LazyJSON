@@ -97,7 +97,7 @@ i.e. which key was missing or whether it's because the type didn't match the val
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "LazyJSON/**/*.swift"
+  s.source_files  = "LazyJSON/**/*.{h, m, swift}"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
