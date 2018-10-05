@@ -16,14 +16,14 @@ enum Operation {
     
 }
 
-public struct LazyJSON : JSONType {
+public struct LazyJSON {
     
     public let object: JSON
     
     private var list = [Operation]()
     
     // TODO: Use identifier to identify which API the JSON originates from.
-    public init(_ object: JSONType) {
+    public init(_ object: Any) {
         self.object = .some(object)
     }
     

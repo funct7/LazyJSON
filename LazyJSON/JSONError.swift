@@ -15,7 +15,7 @@ public enum JSONError : LocalizedError {
     
     /// The key-value pair exists,
     /// but the value type is different than the specified type.
-    case invalidType(keyPath: String, type: JSONType.Type)
+    case invalidType(keyPath: String, type: Any.Type)
     
     public var errorDescription: String? {
         switch self {

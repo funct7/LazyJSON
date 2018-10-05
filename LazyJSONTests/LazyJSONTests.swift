@@ -22,7 +22,7 @@ fileprivate extension Optional.Key {
 class LazyJSONTests: XCTestCase {
     
     func testValidKeyInvalidType() {
-        let dic: [String : JSONType] = [
+        let dic: [String : Any] = [
             "foo" : 20,
             "bar" : ["string"],
             ]
@@ -83,7 +83,7 @@ class LazyJSONTests: XCTestCase {
     }
     
     func testValidIndexInvalidType() {
-        let arr: [JSONType] = [
+        let arr: [Any] = [
             ["foo": 10,],
             ["bar": 20.0,],
             ["baz": ["baz" : "string"]]
@@ -191,7 +191,7 @@ class LazyJSONTests: XCTestCase {
     }
     
     func testInvalidKey() {
-        let dic: [String : JSONType] = [
+        let dic: [String : Any] = [
             "foo" : 20,
             "bar" : ["string"],
             ]
@@ -208,7 +208,7 @@ class LazyJSONTests: XCTestCase {
             }
         }
         
-        let arr: [JSONType] = [
+        let arr: [Any] = [
             ["foo": 10,],
             ["bar": 20,],
             ]
@@ -227,7 +227,7 @@ class LazyJSONTests: XCTestCase {
     }
     
     func testInvalidIndex() {
-        let dic: [String : JSONType] = [
+        let dic: [String : Any] = [
             "foo" : 20,
             "bar" : ["string"],
             ]
@@ -244,7 +244,7 @@ class LazyJSONTests: XCTestCase {
             }
         }
         
-        let arr: [JSONType] = [
+        let arr: [Any] = [
             ["foo": 10,],
             ["bar": 20,],
         ]

@@ -16,9 +16,9 @@ import Foundation
  In order to get debug information on where the operation went wrong,
  use `LazyJSON` instead.
  */
-public typealias JSON = Optional<JSONType>
+public typealias JSON = Optional<Any>
 
-extension Optional where Wrapped == JSONType {
+extension Optional where Wrapped == Any {
     
     /**
      The type encapsulating the string key that is used to access the value.
@@ -42,7 +42,7 @@ extension Optional where Wrapped == JSONType {
 
 }
 
-extension Optional where Wrapped == JSONType {
+extension Optional where Wrapped == Any {
     
     public subscript(key: Optional.Key) -> JSON {
         get {
@@ -101,7 +101,7 @@ extension Optional where Wrapped == JSONType {
     
 }
 
-extension Optional where Wrapped == JSONType {
+extension Optional where Wrapped == Any {
     
     /**
      Returns an `Int` value at the specified key path.
@@ -160,7 +160,7 @@ extension Optional where Wrapped == JSONType {
      */
     public var json: JSONKeyedContainer? { return getValue() }
     
-    private func getValue<T: JSONType>() -> T? {
+    private func getValue<T>() -> T? {
         guard let value = self,
               let result = value as? T
         else { return nil }

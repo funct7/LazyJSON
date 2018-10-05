@@ -22,7 +22,7 @@ fileprivate extension Optional.Key {
 class JSONTests: XCTestCase {
     
     func testTopLevelDictionary() {
-        var dic = [String : JSONType]()
+        var dic = [String : Any]()
         
         do {
             let json = JSON(dic)
@@ -226,7 +226,7 @@ class JSONTests: XCTestCase {
     }
     
     func testTopLevelArray() {
-        var array = [JSONType]()
+        var array = [Any]()
         
         do {
             let json = JSON(array)
