@@ -18,13 +18,17 @@ enum Operation {
 
 public struct LazyJSON {
     
-    public let object: JSON
+    let object: JSON
     
     private var list = [Operation]()
     
     // TODO: Use identifier to identify which API the JSON originates from.
-    public init(_ object: Any) {
-        self.object = .some(object)
+    public init<T: Any>(_ object: T?) {
+        if let object = object {
+            self.object = .some(object as Any)
+        } else {
+            self.object = .none
+        }
     }
     
     public subscript(key: JSON.Key) -> LazyJSON {
@@ -43,6 +47,14 @@ public struct LazyJSON {
         }
     }
     
+    public var number: NSNumber? {
+        do {
+            let (json, _) = try eval()
+            return json as? NSNumber
+        }
+        catch { return nil }
+    }
+    
     public func numberValue() throws -> NSNumber {
         let (json, keyPath) = try eval()
         
@@ -54,6 +66,14 @@ public struct LazyJSON {
         }
         
         return number
+    }
+    
+    public var int: Int? {
+        do {
+            let (json, _) = try eval()
+            return json as? Int
+        }
+        catch { return nil }
     }
     
     public func intValue() throws -> Int {
@@ -69,6 +89,14 @@ public struct LazyJSON {
         return int
     }
     
+    public var double: Double? {
+        do {
+            let (json, _) = try eval()
+            return json as? Double
+        }
+        catch { return nil }
+    }
+    
     public func doubleValue() throws -> Double {
         let (json, keyPath) = try eval()
 
@@ -80,6 +108,14 @@ public struct LazyJSON {
         }
         
         return double
+    }
+    
+    public var bool: Bool? {
+        do {
+            let (json, _) = try eval()
+            return json as? Bool
+        }
+        catch { return nil }
     }
     
     public func boolValue() throws -> Bool {
@@ -95,6 +131,14 @@ public struct LazyJSON {
         return bool
     }
     
+    public var string: String? {
+        do {
+            let (json, _) = try eval()
+            return json as? String
+        }
+        catch { return nil }
+    }
+    
     public func stringValue() throws -> String {
         let (json, keyPath) = try eval()
         
@@ -108,6 +152,14 @@ public struct LazyJSON {
         return string
     }
     
+    public var array: JSONIndexedContainer? {
+        do {
+            let (json, _) = try eval()
+            return json as? JSONIndexedContainer
+        }
+        catch { return nil }
+    }
+
     public func arrayValue() throws -> JSONIndexedContainer {
         let (json, keyPath) = try eval()
         
@@ -119,6 +171,14 @@ public struct LazyJSON {
         }
         
         return array
+    }
+    
+    public var dictionary: JSONKeyedContainer? {
+        do {
+            let (json, _) = try eval()
+            return json as? JSONKeyedContainer
+        }
+        catch { return nil }
     }
     
     public func dictionaryValue() throws -> JSONKeyedContainer {
