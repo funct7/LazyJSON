@@ -194,6 +194,27 @@ public struct LazyJSON {
         return dictionary
     }
     
+    public var any: Any? {
+        do {
+            return try eval().0 as Any
+        } catch {
+            return nil
+        }
+    }
+    
+    public func anyValue() throws -> Any {
+        let (any, keyPath) = try eval()
+        
+        guard let some = any else {
+            throw JSONError.invalidType(
+                keyPath: keyPath,
+                type: Any.self
+            )
+        }
+        
+        return some
+    }
+    
     // TODO: Refactor!!
     private func eval() throws -> (JSON, String) {
         var json: JSON = object
