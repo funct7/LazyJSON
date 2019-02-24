@@ -45,10 +45,16 @@ extension Optional where Wrapped == Any {
 extension Optional where Wrapped == Any {
     
     public subscript(key: Optional.Key) -> JSON {
+        get { return self[key.rawValue] }
+        // TODO: Test this
+        set { self[key.rawValue] = newValue }
+    }
+    
+    public subscript(key: String) -> JSON {
         get {
             if let val = self,
-               let object = val as? JSONKeyedContainer,
-               let value = object[key.rawValue]
+                let object = val as? JSONKeyedContainer,
+                let value = object[key]
             {
                 return Optional(value)
             } else {
@@ -58,13 +64,13 @@ extension Optional where Wrapped == Any {
         // TODO: Test this
         set {
             guard case .some(let val) = self,
-                  var object = val as? JSONKeyedContainer
-            else { return }
+                var object = val as? JSONKeyedContainer
+                else { return }
             
             if let newValue = newValue {
-                object[key.rawValue] = newValue
+                object[key] = newValue
             } else {
-                object.removeValue(forKey: key.rawValue)
+                object.removeValue(forKey: key)
             }
             
             self = Optional(object)

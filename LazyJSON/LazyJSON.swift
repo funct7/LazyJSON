@@ -39,6 +39,12 @@ public struct LazyJSON {
         }
     }
     
+    public subscript(key: String) -> LazyJSON {
+        get {
+            return self[JSON.Key(rawValue: key)!]
+        }
+    }
+        
     public subscript(index: Int) -> LazyJSON {
         get {
             var copy = self
