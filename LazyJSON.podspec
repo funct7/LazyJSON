@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "LazyJSON"
-  s.version      = "0.1.1"
+  s.version      = "0.2.0"
   s.summary      = "A JSON library that supports easy debugging."
 
   # This description is used to generate tags and improve search results.
@@ -96,7 +96,8 @@ i.e. which key was missing or whether it's because the type didn't match the val
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "LazyJSON/**/*.{h, m}", 'LazyJSON/*.swift'
+  s.source_files  = "LazyJSON/**/*.{h, m}", 'LazyJSON/**/*.swift'
+  s.swift_version = "5.0"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
