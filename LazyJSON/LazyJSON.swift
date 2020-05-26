@@ -15,14 +15,14 @@ enum Operation {
 
 public struct LazyJSON {
     
-    let object: JSON
+    let object: Optional<Any>
     
     private var list = [Operation]()
     
     // TODO: Use identifier to identify which API the JSON originates from.
-    public init<T: Any>(_ object: T?) {
+    public init<T>(_ object: T?) {
         if let object = object {
-            self.object = .some(object as Any)
+            self.object = .some(object)
         } else {
             self.object = .none
         }
@@ -31,7 +31,7 @@ public struct LazyJSON {
     public subscript(key: JSON.Key) -> LazyJSON {
         get {
             var copy = self
-            copy.list += [Operation.key(key)]
+            copy.list += [.key(key)]
             return copy
         }
     }
@@ -45,7 +45,7 @@ public struct LazyJSON {
     public subscript(index: Int) -> LazyJSON {
         get {
             var copy = self
-            copy.list += [Operation.index(index)]
+            copy.list += [.index(index)]
             return copy
         }
     }
@@ -64,8 +64,7 @@ public struct LazyJSON {
         guard let number = json.number else {
             throw JSONError.invalidType(
                 keyPath: keyPath,
-                type: NSNumber.self
-            )
+                type: NSNumber.self)
         }
         
         return number
@@ -85,8 +84,7 @@ public struct LazyJSON {
         guard let int = json.int else {
             throw JSONError.invalidType(
                 keyPath: keyPath,
-                type: Int.self
-            )
+                type: Int.self)
         }
         
         return int
@@ -106,8 +104,7 @@ public struct LazyJSON {
         guard let double = json.double else {
             throw JSONError.invalidType(
                 keyPath: keyPath,
-                type: Double.self
-            )
+                type: Double.self)
         }
         
         return double
@@ -127,8 +124,7 @@ public struct LazyJSON {
         guard let bool = json.bool else {
             throw JSONError.invalidType(
                 keyPath: keyPath,
-                type: Bool.self
-            )
+                type: Bool.self)
         }
         
         return bool
@@ -148,8 +144,7 @@ public struct LazyJSON {
         guard let string = json.string else {
             throw JSONError.invalidType(
                 keyPath: keyPath,
-                type: String.self
-            )
+                type: String.self)
         }
         
         return string
@@ -169,8 +164,7 @@ public struct LazyJSON {
         guard let array = json.array else {
             throw JSONError.invalidType(
                 keyPath: keyPath,
-                type: JSONIndexedContainer.self
-            )
+                type: JSONIndexedContainer.self)
         }
         
         return array
@@ -190,8 +184,7 @@ public struct LazyJSON {
         guard let dictionary = json.json else {
             throw JSONError.invalidType(
                 keyPath: keyPath,
-                type: JSONKeyedContainer.self
-            )
+                type: JSONKeyedContainer.self)
         }
         
         return dictionary
@@ -211,8 +204,7 @@ public struct LazyJSON {
         guard let some = any else {
             throw JSONError.invalidType(
                 keyPath: keyPath,
-                type: Any.self
-            )
+                type: Any.self)
         }
         
         return some
@@ -233,7 +225,7 @@ public struct LazyJSON {
                         throw JSONError.keyNotFound(keyPath: String(keyPath.dropFirst()))
                         
                     case .some(let temp):
-                        if var temp = temp as? JSONKeyedContainer {
+                        if let temp = temp as? JSONKeyedContainer {
                             keyPath += ".\(key.rawValue)"
                             
                             if let temp = temp[key.rawValue] {
@@ -259,7 +251,7 @@ public struct LazyJSON {
                         throw JSONError.keyNotFound(keyPath: String(keyPath.dropFirst()))
                         
                     case .some(let temp):
-                        if var temp = temp as? JSONIndexedContainer {
+                        if let temp = temp as? JSONIndexedContainer {
                             keyPath += ".\\\(index)"
                             
                             if index < temp.count {
