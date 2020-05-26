@@ -11,21 +11,19 @@ import Foundation
 public enum JSONError : LocalizedError {
     
     /// The specified key does not exist.
-    case keyNotFound(keyPath: String)
+    case keyNotFound(keyPath: [String])
     
     /// The key-value pair exists,
     /// but the value type is different than the specified type.
-    case invalidType(keyPath: String, type: Any.Type)
+    case invalidType(keyPath: [String], type: Any.Type)
     
     public var errorDescription: String? {
         switch self {
+        case .keyNotFound(keyPath: let keyPath):
+            return "The given key is not found.\nKeyPath: \(keyPath)"
             
-        case .keyNotFound:
-            return "The given key is not found."
-            
-        case .invalidType:
-            return "The given value type is not valid."
-            
+        case .invalidType(keyPath: let keyPath, type: let typeToken):
+            return "The given value type is not valid.\nKeyPath: \(keyPath); Type: \(typeToken)"
         }
     }
     

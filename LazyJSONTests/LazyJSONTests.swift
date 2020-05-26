@@ -35,7 +35,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[.foo].doubleValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "foo")
+                XCTAssertEqual(key, ["foo"])
                 XCTAssertTrue(type == Double.self)
             } else {
                 XCTFail("\($0)")
@@ -44,7 +44,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[.foo].boolValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "foo")
+                XCTAssertEqual(key, ["foo"])
                 XCTAssertTrue(type == Bool.self)
             } else {
                 XCTFail("\($0)")
@@ -53,7 +53,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[.foo].stringValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "foo")
+                XCTAssertEqual(key, ["foo"])
                 XCTAssertTrue(type == String.self)
             } else {
                 XCTFail("\($0)")
@@ -62,7 +62,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[.foo].arrayValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "foo")
+                XCTAssertEqual(key, ["foo"])
                 XCTAssertTrue(type == JSONIndexedContainer.self)
             } else {
                 XCTFail("\($0)")
@@ -71,7 +71,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[.foo].dictionaryValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "foo")
+                XCTAssertEqual(key, ["foo"])
                 XCTAssertTrue(type == JSONKeyedContainer.self)
             } else {
                 XCTFail("\($0)")
@@ -96,7 +96,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[0][.foo].doubleValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "\\0.foo")
+                XCTAssertEqual(key, ["\\0", "foo"])
                 XCTAssertTrue(type == Double.self)
             } else {
                 XCTFail("\($0)")
@@ -105,7 +105,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[0][.foo].boolValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "\\0.foo")
+                XCTAssertEqual(key, ["\\0", "foo"])
                 XCTAssertTrue(type == Bool.self)
             } else {
                 XCTFail("\($0)")
@@ -114,7 +114,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[0][.foo].stringValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "\\0.foo")
+                XCTAssertEqual(key, ["\\0", "foo"])
                 XCTAssertTrue(type == String.self)
             } else {
                 XCTFail("\($0)")
@@ -123,7 +123,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[0][.foo].arrayValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "\\0.foo")
+                XCTAssertEqual(key, ["\\0", "foo"])
                 XCTAssertTrue(type == JSONIndexedContainer.self)
             } else {
                 XCTFail("\($0)")
@@ -132,7 +132,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[0][.foo].dictionaryValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "\\0.foo")
+                XCTAssertEqual(key, ["\\0", "foo"])
                 XCTAssertTrue(type == JSONKeyedContainer.self)
             } else {
                 XCTFail("\($0)")
@@ -143,7 +143,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[1][.bar].intValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "\\1.bar")
+                XCTAssertEqual(key, ["\\1", "bar"])
                 XCTAssertTrue(type == Int.self)
             } else {
                 XCTFail("\($0)")
@@ -154,7 +154,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[1][.bar].boolValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "\\1.bar")
+                XCTAssertEqual(key, ["\\1", "bar"])
                 XCTAssertTrue(type == Bool.self)
             } else {
                 XCTFail("\($0)")
@@ -163,7 +163,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[1][.bar].stringValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "\\1.bar")
+                XCTAssertEqual(key, ["\\1", "bar"])
                 XCTAssertTrue(type == String.self)
             } else {
                 XCTFail("\($0)")
@@ -172,7 +172,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[1][.bar].arrayValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "\\1.bar")
+                XCTAssertEqual(key, ["\\1", "bar"])
                 XCTAssertTrue(type == JSONIndexedContainer.self)
             } else {
                 XCTFail("\($0)")
@@ -181,7 +181,7 @@ class LazyJSONTests: XCTestCase {
         
         XCTAssertThrowsError(try json[1][.bar].dictionaryValue()) {
             if case .invalidType(let key, let type)? = $0 as? JSONError {
-                XCTAssertEqual(key, "\\1.bar")
+                XCTAssertEqual(key, ["\\1", "bar"])
                 XCTAssertTrue(type == JSONKeyedContainer.self)
             } else {
                 XCTFail("\($0)")
@@ -201,7 +201,7 @@ class LazyJSONTests: XCTestCase {
             
             XCTAssertThrowsError(try json[.baz].intValue()) {
                 if case .keyNotFound(let key)? = $0 as? JSONError {
-                    XCTAssertEqual(key, "baz")
+                    XCTAssertEqual(key, ["baz"])
                 } else {
                     XCTFail("\($0)")
                 }
@@ -218,7 +218,7 @@ class LazyJSONTests: XCTestCase {
             
             XCTAssertThrowsError(try json[0][.bar].dictionaryValue()) {
                 if case .keyNotFound(let key)? = $0 as? JSONError {
-                    XCTAssertEqual(key, "\\0.bar")
+                    XCTAssertEqual(key, ["\\0", "bar"])
                 } else {
                     XCTFail("\($0)")
                 }
@@ -237,7 +237,7 @@ class LazyJSONTests: XCTestCase {
             
             XCTAssertThrowsError(try json[.bar][1].doubleValue()) {
                 if case .keyNotFound(let key)? = $0 as? JSONError {
-                    XCTAssertEqual(key, "bar.\\1")
+                    XCTAssertEqual(key, ["bar", "\\1"])
                 } else {
                     XCTFail("\($0)")
                 }
@@ -254,7 +254,7 @@ class LazyJSONTests: XCTestCase {
             
             XCTAssertThrowsError(try json[2][.foo].doubleValue()) {
                 if case .keyNotFound(let key)? = $0 as? JSONError {
-                    XCTAssertEqual(key, "\\2")
+                    XCTAssertEqual(key, ["\\2"])
                 } else {
                     XCTFail("\($0)")
                 }

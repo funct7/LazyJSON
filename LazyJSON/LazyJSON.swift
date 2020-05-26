@@ -210,50 +210,50 @@ public struct LazyJSON {
         return some
     }
     
-    private func eval() throws -> (JSON, String) {
+    private func eval() throws -> (JSON, [String]) {
         var keyPath = [String]()
         
         let result = try list.reduce(object) {
             switch $1 {
             case .key(let key):
                 guard $0 != nil else {
-                    throw JSONError.keyNotFound(keyPath: keyPath.joined(separator: "."))
+                    throw JSONError.keyNotFound(keyPath: keyPath)
                 }
                 guard let keyedContainer = $0 as? JSONKeyedContainer else {
                     throw JSONError.invalidType(
-                        keyPath: keyPath.joined(separator: "."),
+                        keyPath: keyPath,
                         type: JSONKeyedContainer.self)
                 }
                 
                 keyPath.append(key.rawValue)
                 
                 guard let item = keyedContainer[key.rawValue] else {
-                    throw JSONError.keyNotFound(keyPath: keyPath.joined(separator: "."))
+                    throw JSONError.keyNotFound(keyPath: keyPath)
                 }
                 
                 return item
                 
             case .index(let index):
                 guard $0 != nil else {
-                    throw JSONError.keyNotFound(keyPath: keyPath.joined(separator: "."))
+                    throw JSONError.keyNotFound(keyPath: keyPath)
                 }
                 guard let indexedContainer = $0 as? JSONIndexedContainer else {
                     throw JSONError.invalidType(
-                        keyPath: keyPath.joined(separator: "."),
+                        keyPath: keyPath,
                         type: JSONIndexedContainer.self)
                 }
                 
                 keyPath.append("\\\(index)")
                 
                 guard indexedContainer.indices.contains(index) else {
-                    throw JSONError.keyNotFound(keyPath: keyPath.joined(separator: "."))
+                    throw JSONError.keyNotFound(keyPath: keyPath)
                 }
                 
                 return indexedContainer[index]
             }
         }
         
-        return (result, keyPath.joined(separator: "."))
+        return (result, keyPath)
     }
     
 }
