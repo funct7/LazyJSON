@@ -41,7 +41,7 @@ public struct LazyJSON {
             return self[JSON.Key(key)]
         }
     }
-        
+    
     public subscript(index: Int) -> LazyJSON {
         get {
             var copy = self
@@ -100,7 +100,7 @@ public struct LazyJSON {
     
     public func doubleValue() throws -> Double {
         let (json, keyPath) = try eval()
-
+        
         guard let double = json.double else {
             throw JSONError.invalidType(
                 keyPath: keyPath,
@@ -157,7 +157,7 @@ public struct LazyJSON {
         }
         catch { return nil }
     }
-
+    
     public func arrayValue() throws -> JSONIndexedContainer {
         let (json, keyPath) = try eval()
         
@@ -210,67 +210,50 @@ public struct LazyJSON {
         return some
     }
     
-    // TODO: Refactor!!
     private func eval() throws -> (JSON, String) {
-        var json: JSON = object
-        var keyPath = ""
+        var keyPath = [String]()
         
-        for op in list {
-            switch op {
-                case .key(let key):
-
-                    switch json {
-                        
-                    case .none:
-                        throw JSONError.keyNotFound(keyPath: String(keyPath.dropFirst()))
-                        
-                    case .some(let temp):
-                        if let temp = temp as? JSONKeyedContainer {
-                            keyPath += ".\(key.rawValue)"
-                            
-                            if let temp = temp[key.rawValue] {
-                                json = .some(temp)
-                            } else {
-                                throw JSONError.keyNotFound(keyPath: String(keyPath.dropFirst()))
-                            }
-                        } else {
-                            throw JSONError.invalidType(
-                                keyPath: String(keyPath.dropFirst()),
-                                type: JSONKeyedContainer.self
-                            )
-                        }
-                        
-                    }
-                    
+        let result = try list.reduce(object) {
+            switch $1 {
+            case .key(let key):
+                guard $0 != nil else {
+                    throw JSONError.keyNotFound(keyPath: keyPath.joined(separator: "."))
+                }
+                guard let keyedContainer = $0 as? JSONKeyedContainer else {
+                    throw JSONError.invalidType(
+                        keyPath: keyPath.joined(separator: "."),
+                        type: JSONKeyedContainer.self)
+                }
                 
-                case .index(let index):
-                    
-                    switch json {
-                        
-                    case .none:
-                        throw JSONError.keyNotFound(keyPath: String(keyPath.dropFirst()))
-                        
-                    case .some(let temp):
-                        if let temp = temp as? JSONIndexedContainer {
-                            keyPath += ".\\\(index)"
-                            
-                            if index < temp.count {
-                                json = .some(temp[index])
-                            } else {
-                                throw JSONError.keyNotFound(keyPath: String(keyPath.dropFirst()))
-                            }
-                        } else {
-                            throw JSONError.invalidType(
-                                keyPath: String(keyPath.dropFirst()),
-                                type: JSONIndexedContainer.self
-                            )
-                        }
-
-                    }
+                keyPath.append(key.rawValue)
+                
+                guard let item = keyedContainer[key.rawValue] else {
+                    throw JSONError.keyNotFound(keyPath: keyPath.joined(separator: "."))
+                }
+                
+                return item
+                
+            case .index(let index):
+                guard $0 != nil else {
+                    throw JSONError.keyNotFound(keyPath: keyPath.joined(separator: "."))
+                }
+                guard let indexedContainer = $0 as? JSONIndexedContainer else {
+                    throw JSONError.invalidType(
+                        keyPath: keyPath.joined(separator: "."),
+                        type: JSONIndexedContainer.self)
+                }
+                
+                keyPath.append("\\\(index)")
+                
+                guard indexedContainer.indices.contains(index) else {
+                    throw JSONError.keyNotFound(keyPath: keyPath.joined(separator: "."))
+                }
+                
+                return indexedContainer[index]
             }
         }
-
-        return (json, String(keyPath.dropFirst()))
+        
+        return (result, keyPath.joined(separator: "."))
     }
     
 }
