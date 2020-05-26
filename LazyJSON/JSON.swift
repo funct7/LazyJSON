@@ -38,6 +38,8 @@ extension Optional where Wrapped == Any {
         
         public init?(rawValue: String) { self.rawValue = rawValue }
         
+        public init(_ rawValue: String) { self.rawValue = rawValue }
+        
     }
 
 }

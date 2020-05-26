@@ -9,11 +9,8 @@
 import Foundation
 
 enum Operation {
-    
     case key(JSON.Key)
-    
     case index(Int)
-    
 }
 
 public struct LazyJSON {
@@ -41,7 +38,7 @@ public struct LazyJSON {
     
     public subscript(key: String) -> LazyJSON {
         get {
-            return self[JSON.Key(rawValue: key)!]
+            return self[JSON.Key(key)]
         }
     }
         

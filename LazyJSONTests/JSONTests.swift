@@ -11,11 +11,11 @@ import XCTest
 
 fileprivate extension Optional.Key {
     
-    static var foo: JSON.Key { return JSON.Key(rawValue: "foo")! }
+    static var foo: JSON.Key { return JSON.Key("foo") }
     
-    static var bar: JSON.Key { return JSON.Key(rawValue: "bar")! }
+    static var bar: JSON.Key { return JSON.Key("bar") }
     
-    static var baz: JSON.Key { return JSON.Key(rawValue: "baz")! }
+    static var baz: JSON.Key { return JSON.Key("baz") }
     
 }
 
